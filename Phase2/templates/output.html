@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>UC System Web Search</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/styles.css') }}" />
+  </head>
+
+	<body id="output">
+		<div class="header">
+			<h1>UC System Web Search</h1>
+			<form action = "/submit" method = "POST">
+				<input type = "text" name = "query" placeholder = "Search or type URL" value = "{{query}}"/>
+				<input type = "submit" value = "Submit"/>
+			</form>
+		</div>
+
+		<div class="results">
+			{% for item in lucene_output %}
+			<div class="result">
+				<div class="result-head">
+					<h1><a href="{{item['url']}}">{{item['title']}}</a></h1>
+					<p>{{item['url']}} <br>Score: {{item['score']}}<br></p>
+				</div>
+				<p>{{item['context']}} ...</p>
+			</div>
+			{% endfor %}
+		</div>
+  	
+	</body>
+
+</html>
